@@ -1,10 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using NSubstitute;
-using Serilog.Events;
-using System;
-using Xunit;
-
-namespace Serilog.Enrichers.ClientInfo.Tests;
+﻿namespace Serilog.Enrichers.ClientInfo.Tests;
 
 public class ClientHeaderEnricherTests
 {
@@ -16,7 +10,7 @@ public class ClientHeaderEnricherTests
         _contextAccessor = Substitute.For<IHttpContextAccessor>();
         _contextAccessor.HttpContext.Returns(httpContext);
     }
-    
+
     [Fact]
     public void EnrichLogWithClientHeader_WhenHttpRequestContainHeader_ShouldCreateNamedHeaderValueProperty()
     {

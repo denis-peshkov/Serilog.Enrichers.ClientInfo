@@ -1,22 +1,10 @@
-﻿using Serilog.Core;
-using Serilog.Events;
-using System;
-
-#if NETFULL
-
-using Serilog.Enrichers.ClientInfo.Accessors;
-
-#else
-using Microsoft.AspNetCore.Http;
-#endif
-
-namespace Serilog.Enrichers;
+﻿namespace Serilog.Enrichers;
 
 /// <inheritdoc/>
 public class CorrelationIdEnricher : ILogEventEnricher
 {
-    private const string CorrelationIdItemKey = "Serilog_CorrelationId";
-    private const string PropertyName = "CorrelationId";
+    private const string CORRELATION_ID_ITEM_KEY = "Serilog_CorrelationId";
+    private const string CORRELATION_ID_PROPERTY_NAME = "CorrelationId";
     private readonly string _headerKey;
     private readonly bool _addValueIfHeaderAbsence;
     private readonly IHttpContextAccessor _contextAccessor;
@@ -41,7 +29,7 @@ public class CorrelationIdEnricher : ILogEventEnricher
             return;
         }
 
-        if (httpContext.Items[CorrelationIdItemKey] is LogEventProperty logEventProperty)
+        if (httpContext.Items[CORRELATION_ID_ITEM_KEY] is LogEventProperty logEventProperty)
         {
             logEvent.AddPropertyIfAbsent(logEventProperty);
             return;
@@ -52,9 +40,9 @@ public class CorrelationIdEnricher : ILogEventEnricher
             ? header
             : (_addValueIfHeaderAbsence ? Guid.NewGuid().ToString() : null);
 
-        var correlationIdProperty = new LogEventProperty(PropertyName, new ScalarValue(correlationId));
+        var correlationIdProperty = new LogEventProperty(CORRELATION_ID_PROPERTY_NAME, new ScalarValue(correlationId));
         logEvent.AddOrUpdateProperty(correlationIdProperty);
 
-        httpContext.Items.Add(CorrelationIdItemKey, correlationIdProperty);
+        httpContext.Items.Add(CORRELATION_ID_ITEM_KEY, correlationIdProperty);
     }
 }

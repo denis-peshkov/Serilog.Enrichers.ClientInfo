@@ -1,10 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using NSubstitute;
-using Serilog.Events;
-using System;
-using Xunit;
-
-namespace Serilog.Enrichers.ClientInfo.Tests;
+﻿namespace Serilog.Enrichers.ClientInfo.Tests;
 
 public class CorrelationIdEnricherTests
 {

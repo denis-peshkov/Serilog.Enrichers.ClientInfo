@@ -1,17 +1,4 @@
-﻿using Serilog.Configuration;
-using Serilog.Enrichers;
-using System;
-using System.Web;
-
-#if NETFULL
-
-using Serilog.Enrichers.ClientInfo.Accessors;
-
-#else
-using Microsoft.AspNetCore.Http;
-#endif
-
-namespace Serilog;
+﻿namespace Serilog;
 
 /// <summary>
 ///   Extension methods for setting up client IP, client agent and correlation identifier enrichers <see cref="LoggerEnrichmentConfiguration"/>.
@@ -78,8 +65,10 @@ public static class ClientInfoLoggerConfigurationExtensions
     /// <exception cref="ArgumentNullException">enrichmentConfiguration</exception>
     /// <exception cref="ArgumentNullException">headerName</exception>
     /// <returns>The logger configuration so that multiple calls can be chained.</returns>
-    public static LoggerConfiguration WithRequestHeader(this LoggerEnrichmentConfiguration enrichmentConfiguration,
-        string headerName, string propertyName = null)
+    public static LoggerConfiguration WithRequestHeader(
+        this LoggerEnrichmentConfiguration enrichmentConfiguration,
+        string headerName,
+        string propertyName = null)
     {
         if (enrichmentConfiguration == null)
         {

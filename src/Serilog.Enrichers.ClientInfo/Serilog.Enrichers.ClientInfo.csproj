@@ -1,40 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFrameworks>net462;netstandard2.0;netstandard2.1;net6.0;net7.0</TargetFrameworks>
-		<AssemblyName>Serilog.Enrichers.ClientInfo</AssemblyName>
+    <TargetFrameworks>netstandard2.1;net6.0;net7.0</TargetFrameworks>
+    <LangVersion>11</LangVersion>
     <RootNamespace>Serilog</RootNamespace>
-	  <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU</Platforms>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-	  <DebugType>embedded</DebugType>
-	  <EmbedAllSources>true</EmbedAllSources>
-	  <Version>2.0.3</Version>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <DebugType>embedded</DebugType>
+    <EmbedAllSources>true</EmbedAllSources>
+    <Version>7.0.0</Version>
   </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
-    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
-  </PropertyGroup>
+  
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.1'">
-    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_1</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net462'">
-    <DefineConstants>NET45;NETFULL</DefineConstants>
+    <DefineConstants>NETCORE;NETSTANDARD2_1</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.22" />
-    <PackageReference Include="Serilog" Version="2.7.1" />
-  </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1'">
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.22" />
     <PackageReference Include="Serilog" Version="2.9.0" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net462'">
-    <Reference Include="System.Web" />
-    <PackageReference Include="Serilog" Version="2.4.0" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' != 'net462' and '$(TargetFramework)' != 'netstandard2.0' and '$(TargetFramework)' != 'netstandard2.1'">
+  
+  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.1'">
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Serilog" Version="2.9.0" />
   </ItemGroup>

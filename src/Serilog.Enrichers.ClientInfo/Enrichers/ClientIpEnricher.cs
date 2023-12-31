@@ -1,24 +1,10 @@
-﻿using Serilog.Core;
-using Serilog.Events;
-using System.Linq;
-using System.Runtime.CompilerServices;
-
-#if NETFULL
-
-using Serilog.Enrichers.ClientInfo.Accessors;
-
-#else
-using Microsoft.AspNetCore.Http;
-#endif
-
-[assembly: InternalsVisibleTo("Serilog.Enrichers.ClientInfo.Tests")]
-
+﻿[assembly: InternalsVisibleTo("Serilog.Enrichers.ClientInfo.Tests")]
 namespace Serilog.Enrichers
 {
     public class ClientIpEnricher : ILogEventEnricher
     {
-        private const string IpAddressPropertyName = "ClientIp";
-        private const string IpAddressItemKey = "Serilog_ClientIp";
+        private const string IP_ADDRESS_ITEM_KEY = "Serilog_ClientIp";
+        private const string IP_ADDRESS_PROPERTY_NAME = "ClientIp";
         private readonly string _forwardHeaderKey;
 
         private readonly IHttpContextAccessor _contextAccessor;
@@ -40,7 +26,7 @@ namespace Serilog.Enrichers
             if (httpContext == null)
                 return;
 
-            if (httpContext.Items[IpAddressItemKey] is LogEventProperty logEventProperty)
+            if (httpContext.Items[IP_ADDRESS_ITEM_KEY] is LogEventProperty logEventProperty)
             {
                 logEvent.AddPropertyIfAbsent(logEventProperty);
                 return;
@@ -51,8 +37,8 @@ namespace Serilog.Enrichers
             if (string.IsNullOrWhiteSpace(ipAddress))
                 ipAddress = "unknown";
 
-            var ipAddressProperty = new LogEventProperty(IpAddressPropertyName, new ScalarValue(ipAddress));
-            httpContext.Items.Add(IpAddressItemKey, ipAddressProperty);
+            var ipAddressProperty = new LogEventProperty(IP_ADDRESS_PROPERTY_NAME, new ScalarValue(ipAddress));
+            httpContext.Items.Add(IP_ADDRESS_ITEM_KEY, ipAddressProperty);
 
             logEvent.AddPropertyIfAbsent(ipAddressProperty);
         }
@@ -79,9 +65,9 @@ namespace Serilog.Enrichers
         }
 #endif
 
-        private string GetIpAddressFromProxy(string proxifiedIpList)
+        private string GetIpAddressFromProxy(string proxyFieldIpList)
         {
-            var addresses = proxifiedIpList.Split(',');
+            var addresses = proxyFieldIpList.Split(',');
 
             return addresses.Length == 0 ? string.Empty : addresses[0].Trim();
         }

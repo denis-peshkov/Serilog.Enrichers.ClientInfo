@@ -13,10 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Enrichers.ClientInf
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{931596BA-056D-4E8C-9FED-6C60C0D1AB83}"
 	ProjectSection(SolutionItems) = preProject
+		Serilog.Enrichers.ClientInfo.nuspec = Serilog.Enrichers.ClientInfo.nuspec
 		.gitignore = .gitignore
 		LICENSE = LICENSE
 		README.md = README.md
-		Serilog.Enrichers.ClientInfo.nuspec = Serilog.Enrichers.ClientInfo.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{A170BD74-8542-4880-BC6F-283D03C6AA6D}"

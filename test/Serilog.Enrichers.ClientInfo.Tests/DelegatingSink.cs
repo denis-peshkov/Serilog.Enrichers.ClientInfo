@@ -1,8 +1,4 @@
-﻿using Serilog.Core;
-using Serilog.Events;
-using System;
-
-namespace Serilog.Enrichers.ClientInfo.Tests;
+﻿namespace Serilog.Enrichers.ClientInfo.Tests;
 
 public class DelegatingSink : ILogEventSink
 {

@@ -1,15 +1,4 @@
-﻿using Serilog.Core;
-using Serilog.Events;
-
-#if NETFULL
-
-using Serilog.Enrichers.ClientInfo.Accessors;
-
-#else
-using Microsoft.AspNetCore.Http;
-#endif
-
-namespace Serilog.Enrichers;
+﻿namespace Serilog.Enrichers;
 
 /// <inheritdoc/>
 public class ClientHeaderEnricher : ILogEventEnricher
@@ -27,7 +16,7 @@ public class ClientHeaderEnricher : ILogEventEnricher
     internal ClientHeaderEnricher(string headerKey, string propertyName, IHttpContextAccessor contextAccessor)
     {
         _headerKey = headerKey;
-        _propertyName = string.IsNullOrWhiteSpace(propertyName) 
+        _propertyName = string.IsNullOrWhiteSpace(propertyName)
             ? headerKey.Replace("-", "")
             : propertyName;
         _clientHeaderItemKey = $"Serilog_{headerKey}";

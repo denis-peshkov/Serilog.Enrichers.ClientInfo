@@ -1,9 +1,3 @@
-using Microsoft.AspNetCore.Http;
-using NSubstitute;
-using Serilog.Events;
-using System.Net;
-using Xunit;
-
 namespace Serilog.Enrichers.ClientInfo.Tests;
 
 public class ClientIpEnricherTests
