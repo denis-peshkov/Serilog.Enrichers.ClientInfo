@@ -16,7 +16,7 @@
 		</releaseNotes>
 		<description>Enrich logs with client IP, CorrelationId and HTTP request headers.</description>
 		<tags>serilog enrichers enricher ip correlation-id request header</tags>
-		<copyright></copyright>
+		<copyright>Copyright 2024</copyright>
 		<dependencies>
 			<group targetFramework="netstandard2.1">
 				<dependency id="Microsoft.AspNetCore.Http" version="2.2.2" />
